@@ -26,6 +26,7 @@ export default function Header() {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Covid-19 Tracker
+            <h2 className='top'><a href='https://frogtok.com'>Powered By FROGTOK (Inshal Ayaz)</a></h2>
           </Typography>
         </Toolbar>
       </AppBar>

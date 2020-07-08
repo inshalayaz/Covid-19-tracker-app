@@ -53,7 +53,6 @@ const handleChange = (e) =>{
   return (
     
     <div className={classes.root}>
-    <h2>Select Country</h2>
       <Select onChange = {handleChange} className = 'select'>
         <option value='PK' className = 'country'>Pakistan</option>
         <option value='US' className = 'country'>USA</option>
