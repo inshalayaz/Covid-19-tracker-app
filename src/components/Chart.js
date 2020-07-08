@@ -1,29 +1,61 @@
 import React, { useState, useEffect } from 'react'
 import {Doughnut} from 'react-chartjs-2'
-
-export default function Chart({data}) {
-   
-    const [chartData, setChartData] = useState({
-        label: 'My First dataset',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
-    })
-
-//    useEffect((data)=>{
-//         setChartData({
-//             label: `${data.countrydata[0].info.title}`,
-//         })
-//    },[])
+import Spinner from './Spinner'
 
 
-    return (
+export default function Chart({data,loading}) {
+    
+
+
+    const [chartData, setChartData] = useState({})
+    
+      
+         
+      useEffect(()=>{
+        if (data){
+
+          setChartData({
+            labels: [
+              'Total Cases',
+              'Total Recovered',
+              'Deaths Today',
+              'Total Deaths'
+            ],
+            datasets: [
+          {
+            data: [`${data.countrydata[0].total_active_cases}` , `${data.countrydata[0].total_recovered} ` , `${data.countrydata[0].total_new_deaths_today}`, `${data.countrydata[0].total_deaths}`],
+            backgroundColor: [
+              '#FFA500',
+              '#008000',
+              '#FF0000',
+              '#8B0000'
+              ],
+              hoverBackgroundColor: [
+                '#FFA500',
+                '#008000',
+                '#FF0000',
+                '#8B0000'
+              ]
+            
+          }
+        ]
+          })
+        }
+      },[data])
+    
+
+
+    // return loading? (
+    //   <h1>Loading</h1>
+    // ):
+
+    return loading? (
+      <Spinner />
+    ):
+    (
         <div>
             <Doughnut data={chartData} />
-            {console.log('data' + data)}
+            {console.log('This is data ' + data)}
         </div>
     )
 }

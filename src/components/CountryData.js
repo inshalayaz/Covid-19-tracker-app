@@ -9,6 +9,7 @@ import '../App.css'
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -20,29 +21,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function CountryData() {
   const classes = useStyles();
-  const [data, setData] = useState() 
+  const [data, setData] = useState('') 
   const [countryCode,setCountryCode] = useState('')
+  const [loading,setLoading] = useState(true)
 
-
-useEffect( (code) => {
+  useEffect( (code) => {
     
-   async function fetchCountryData(countryCode){
-       
-       const apiResponse = await fetch(`https://api.thevirustracker.com/free-api?countryTotal=${countryCode}`);
-       const apiData = await apiResponse.json()
-       console.log(apiData)
-       setData(apiData)
-   }
-   fetchCountryData(countryCode)
+    async function fetchCountryData(countryCode){
+        
+        const apiResponse = await fetch(`https://api.thevirustracker.com/free-api?countryTotal=${countryCode}`);
+        const apiData = await apiResponse.json()
+        console.log(apiData)
+        setData(apiData)
+        setLoading(false)
+    }
+    fetchCountryData(countryCode)
+ 
+ 
+ }, [countryCode])
 
-
-}, [countryCode])
 
 const handleChange = (e) =>{
   setCountryCode(e.target.value)
-  console.log(countryCode)
+ // console.log(countryCode)
 }
 
   return (
@@ -85,7 +90,7 @@ const handleChange = (e) =>{
 
         <Grid item xs = {12}>
           <Paper className={classes.paper}>
-              <Chart data = {data} />
+              <Chart data = {data} loading={loading} />
           </Paper>
           </Grid>
       </Grid>
