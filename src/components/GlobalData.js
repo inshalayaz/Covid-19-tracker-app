@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import NumberFormat from 'react-number-format'
+import Spinner from './Spinner'
 
 
 
@@ -31,11 +32,11 @@ export default function GlobalData() {
   const classesTypography = useStylesTypography();
 
     const [globalData,setGlobalData] = useState();
-    const [loading,setLoading] = useState(false);
+    const [loading,setLoading] = useState(true);
 
     useEffect(() =>{
         async function fetchGlobalData(){
-            setLoading(true)
+            
             const apiResponse = await fetch('https://api.thevirustracker.com/free-api?global=stats')
             const dataFromApi = await apiResponse.json()
             console.log(dataFromApi)
@@ -47,7 +48,7 @@ export default function GlobalData() {
     },[])
 
     if (loading){
-        return <h1>Getting Data</h1>
+        return <Spinner/>
     }else{
 
   return (

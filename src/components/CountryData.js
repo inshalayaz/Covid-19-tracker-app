@@ -60,7 +60,7 @@ const handleChange = (e) =>{
         <option value = 'CA' className = 'country'>Canada</option>
         <option value = 'AU' className = 'country'>Australia</option>
       </Select>
-      <h3>{countryCode ? countryCode : "Select a Country"}</h3>
+      <h1 style={{color:'black'}}>{data ? data.countrydata[0].info.title : "Select a Country"}</h1>
       <Grid container spacing={4}>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
@@ -84,7 +84,7 @@ const handleChange = (e) =>{
         <Grid item xs={3}>
         <Paper className={classes.paper}>
               <h2>Total Overall Deaths</h2>
-              <NumberFormat value={data ? data.countrydata[0].total_deaths : 'Loading'} displayType={'text'} thousandSeparator={true}  style = {{color:'red; ' , fontSize:'30px'}} />
+              <NumberFormat value={data ? data.countrydata[0].total_deaths : 'Loading'} displayType={'text'} thousandSeparator={true}  style = {{color:'#8B0000' , fontSize:'30px'}} />
           </Paper>
         </Grid>
 
